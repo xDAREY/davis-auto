@@ -47,7 +47,7 @@ export function TeamSection() {
 
             <div className="flex flex-wrap gap-8 pt-8 border-t border-tertiary/30">
               {[
-                { value: '100+', label: 'Vehicles Brokered' },
+                { value: '200+', label: 'Vehicles Brokered' },
                 { value: '4+', label: 'Years Experience' },
                 { value: 'ATL', label: 'Atlanta Based' },
               ].map((stat) => (
