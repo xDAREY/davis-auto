@@ -36,7 +36,7 @@ export function Footer() {
             <h4 className="text-[10px] tracking-[0.25em] uppercase text-accent-gold font-semibold mb-6">Services</h4>
             <ul className="space-y-3">
               <li><span className="text-body-sm text-text-muted">Vehicle Sourcing</span></li>
-              <li><span className="text-body-sm text-text-muted">Finance Facilitation</span></li>
+              {/* <li><span className="text-body-sm text-text-muted">Finance Facilitation</span></li> */}
               <li><span className="text-body-sm text-text-muted">Fleet Management</span></li>
               <li><span className="text-body-sm text-text-muted">Vehicle Inspection</span></li>
               <li><span className="text-body-sm text-text-muted">Nationwide Delivery</span></li>
