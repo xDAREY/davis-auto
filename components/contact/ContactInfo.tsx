@@ -43,7 +43,7 @@ export function ContactInfo() {
           label: 'Email',
           content: (
             <>
-              <a href="mailto:info@davishouseofautos.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">info@davishouseofautos.com</a>
+              <a href="mailto:davishouseofautos.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">info@davishouseofautos.com</a>
               <a href="mailto:sales@davishouseauto.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">sales@davishouseauto.com</a>
             </>
           ),
