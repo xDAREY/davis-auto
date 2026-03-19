@@ -1,25 +1,25 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { useNavigation } from '@/app/providers'
 
 export function Hero() {
   const [isVisible, setIsVisible] = useState(false)
+  const [search, setSearch] = useState('')
   const [showViewingOptions, setShowViewingOptions] = useState(false)
   const { setActiveSection } = useNavigation()
   const router = useRouter()
+  const dropdownRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsVisible(true)
     setActiveSection('home')
   }, [setActiveSection])
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      if (!target.closest('#viewing-dropdown')) {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
         setShowViewingOptions(false)
       }
     }
@@ -27,140 +27,195 @@ export function Hero() {
     return () => document.removeEventListener('mousedown', handler)
   }, [])
 
+  const handleSearch = () => {
+    // Always go to /inventory with just the search term — no type filter
+    // VehicleGrid will reset selectedFilters to [] so "All" is active
+    const params = new URLSearchParams()
+    if (search.trim()) params.set('search', search.trim())
+    params.set('reset', '1') // signal VehicleGrid to clear any previous filters
+    router.push(`/inventory?${params.toString()}`)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') handleSearch()
+  }
+
   return (
     <section className="relative min-h-screen w-full overflow-hidden bg-background">
 
-      {/* Car image — right half, desktop only */}
-      <div className="absolute top-0 right-0 w-[55%] h-full hidden md:block">
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/40 to-transparent z-10" />
-        <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-background to-transparent z-10" />
+      {/* Full-bleed background */}
+      <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?w=1200&q=80"
-          alt="Luxury vehicle"
-          className="w-full h-full object-cover object-center opacity-60"
+          src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1600&q=85"
+          alt="Premium vehicles"
+          className="w-full h-full object-cover object-center"
         />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.55) 50%, rgba(15,23,42,0.82) 100%)' }} />
       </div>
 
-      {/* Main content */}
-      <div className="relative z-20 container-gutter max-w-7xl mx-auto flex flex-col justify-center min-h-screen pt-20 pb-16">
-        <div className={`max-w-xl transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+      {/* Content */}
+      <div className={`relative z-20 container-gutter max-w-7xl mx-auto flex flex-col justify-center min-h-screen pt-24 pb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
 
-          {/* Eyebrow */}
-          <div className="flex items-center gap-3 mb-5 md:mb-8">
-            <div className="w-6 md:w-8 h-px bg-accent-gold" />
-            <span className="text-[10px] md:text-[11px] tracking-[0.3em] md:tracking-[0.4em] uppercase text-accent-gold font-medium">
-              Premium Automotive Brokerage
-            </span>
-          </div>
+        {/* Eyebrow */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="w-8 h-px bg-accent-gold" />
+          <span className="text-[10px] md:text-[11px] tracking-[0.35em] uppercase text-accent-gold font-medium">
+            Atlanta's Premier Automotive Broker
+          </span>
+        </div>
 
-          {/* Headline */}
-          <h1 className="font-serif text-[clamp(2.2rem,7vw,4.8rem)] font-light text-text-primary leading-[1.05] mb-4 md:mb-6">
-            Where <em className="italic text-accent-gold font-light">Excellence</em>
-            <br />Meets the<br />Open Road
-          </h1>
+        {/* Headline */}
+        <h1 className="font-serif text-[clamp(2.8rem,6vw,5.2rem)] font-light text-white leading-[1.0] mb-4 md:mb-5 max-w-2xl">
+          Find Your Next
+          <br />
+          <em className="italic text-accent-gold font-light">Dream Vehicle</em>
+        </h1>
 
-          {/* Body copy */}
-          <p className="text-[13px] md:text-[14px] text-text-muted mb-7 md:mb-10 max-w-md leading-[1.8]">
-            Davis House of Automotive curates the finest vehicles for discerning clients.
-            Every car in our collection is hand-selected for quality, history, and performance.
-          </p>
+        <p className="text-[13px] md:text-[15px] text-white/70 mb-8 md:mb-10 max-w-md leading-relaxed">
+          200+ vehicles brokered. Hand-picked inventory. Zero dealership pressure.
+        </p>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3">
-            {/* Browse Inventory */}
+        {/* Search box */}
+        <div
+          style={{
+            background: 'rgba(15,23,42,0.85)',
+            border: '1px solid rgba(201,162,39,0.25)',
+            padding: '16px',
+            maxWidth: 580,
+            backdropFilter: 'blur(8px)',
+          }}
+        >
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder="Search by make, model, or keyword..."
+              style={{
+                flex: 1,
+                background: 'rgba(255,255,255,0.06)',
+                border: '1px solid rgba(255,255,255,0.12)',
+                color: 'white',
+                fontFamily: 'var(--font-outfit)',
+                fontSize: 13,
+                padding: '12px 16px',
+                outline: 'none',
+                transition: 'border-color 0.2s',
+              }}
+              onFocus={(e) => (e.target.style.borderColor = 'rgba(201,162,39,0.5)')}
+              onBlur={(e) => (e.target.style.borderColor = 'rgba(255,255,255,0.12)')}
+            />
             <button
-              onClick={() => router.push('/inventory')}
-              className="bg-accent-gold text-background text-[10px] md:text-[11px] font-semibold tracking-[0.2em] uppercase px-6 py-3 hover:bg-accent-gold-light transition-all duration-300"
+              onClick={handleSearch}
+              style={{
+                background: '#C9A227',
+                color: '#0F172A',
+                border: 'none',
+                fontFamily: 'var(--font-outfit)',
+                fontSize: 11,
+                fontWeight: 700,
+                letterSpacing: '0.15em',
+                textTransform: 'uppercase',
+                padding: '12px 24px',
+                cursor: 'pointer',
+                transition: 'background 0.2s',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = '#E2BA45')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = '#C9A227')}
             >
-              Browse Inventory
+              Search
+            </button>
+          </div>
+          <p style={{ fontSize: 10, color: 'rgba(255,255,255,0.35)', marginTop: 10, letterSpacing: '0.05em' }}>
+            Press Enter or click Search — or{' '}
+            <span
+              onClick={() => router.push('/inventory')}
+              style={{ color: '#C9A227', cursor: 'pointer', textDecoration: 'underline' }}
+            >
+              browse all vehicles →
+            </span>
+          </p>
+        </div>
+
+        {/* Schedule a Viewing */}
+        <div className="mt-5" ref={dropdownRef}>
+          <div className="relative inline-block">
+            <button
+              onClick={() => setShowViewingOptions((o) => !o)}
+              style={{
+                background: 'transparent',
+                border: '1px solid rgba(255,255,255,0.25)',
+                color: 'white',
+                fontFamily: 'var(--font-outfit)',
+                fontSize: 11,
+                fontWeight: 500,
+                letterSpacing: '0.2em',
+                textTransform: 'uppercase',
+                padding: '11px 22px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = '#C9A227'; e.currentTarget.style.color = '#C9A227' }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.25)'; e.currentTarget.style.color = 'white' }}
+            >
+              Schedule a Viewing
+              <span style={{ fontSize: 9, transition: 'transform 0.2s', display: 'inline-block', transform: showViewingOptions ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
             </button>
 
-            {/* Schedule a Viewing — dropdown */}
-            <div id="viewing-dropdown" className="relative">
-              <button
-                onClick={() => setShowViewingOptions((o) => !o)}
-                className="border border-white/20 text-text-primary text-[10px] md:text-[11px] font-medium tracking-[0.2em] uppercase px-6 py-3 hover:border-accent-gold hover:text-accent-gold transition-all duration-300 w-full sm:w-auto flex items-center justify-center gap-2"
-              >
-                Schedule a Viewing
-                <span style={{
-                  fontSize: 9,
-                  display: 'inline-block',
-                  transition: 'transform 0.2s',
-                  transform: showViewingOptions ? 'rotate(180deg)' : 'rotate(0deg)',
-                }}>▼</span>
-              </button>
-
-              {showViewingOptions && (
-                <div style={{
-                  position: 'absolute',
-                  top: 'calc(100% + 6px)',
-                  left: 0,
-                  right: 0,
-                  background: 'var(--color-secondary)',
-                  border: '1px solid rgba(201,162,39,0.3)',
-                  zIndex: 50,
-                  minWidth: 220,
-                }}>
-                  {/* Call option */}
-                  <a
-                    href="tel:6787532700"
-                    onClick={() => setShowViewingOptions(false)}
-                    style={{ display: 'block', padding: '14px 18px', borderBottom: '1px solid rgba(201,162,39,0.1)', textDecoration: 'none' }}
-                    className="hover:bg-accent-gold/10 transition-colors"
-                  >
-                    <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: 3 }}>
-                      Call — Business
-                    </span>
-                    <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: 'var(--color-accent-gold)' }}>
-                      678-753-2700
-                    </span>
-                  </a>
-                  <a
-                    href="tel:6784917134"
-                    onClick={() => setShowViewingOptions(false)}
-                    style={{ display: 'block', padding: '14px 18px', borderBottom: '1px solid rgba(201,162,39,0.1)', textDecoration: 'none' }}
-                    className="hover:bg-accent-gold/10 transition-colors"
-                  >
-                    <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: 3 }}>
-                      Call — Cell
-                    </span>
-                    <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: 'var(--color-accent-gold)' }}>
-                      678-491-7134
-                    </span>
-                  </a>
-                  {/* Email option */}
-                  <a
-                    href="mailto:info@davishouseofautos.com?subject=Schedule a Viewing&body=Hi Dameon,%0A%0AI'd like to schedule a viewing. Please let me know your availability.%0A%0AThank you."
-                    onClick={() => setShowViewingOptions(false)}
-                    style={{ display: 'block', padding: '14px 18px', textDecoration: 'none' }}
-                    className="hover:bg-accent-gold/10 transition-colors"
-                  >
-                    <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--color-text-muted)', marginBottom: 3 }}>
-                      Email
-                    </span>
-                    <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: 'var(--color-accent-gold)' }}>
-                      info@davishouseofautos.com
-                    </span>
-                  </a>
-                </div>
-              )}
-            </div>
+            {showViewingOptions && (
+              <div style={{
+                position: 'absolute',
+                top: 'calc(100% + 6px)',
+                left: 0,
+                background: '#1E293B',
+                border: '1px solid rgba(201,162,39,0.3)',
+                zIndex: 100,
+                minWidth: 240,
+                boxShadow: '0 8px 32px rgba(0,0,0,0.5)',
+              }}>
+                <a href="tel:6787532700" onClick={() => setShowViewingOptions(false)}
+                  style={{ display: 'block', padding: '14px 18px', borderBottom: '1px solid rgba(201,162,39,0.1)', textDecoration: 'none' }}
+                  className="hover:bg-accent-gold/10 transition-colors">
+                  <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: 3 }}>Call — Business</span>
+                  <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>678-753-2700</span>
+                </a>
+                <a href="tel:6784917134" onClick={() => setShowViewingOptions(false)}
+                  style={{ display: 'block', padding: '14px 18px', borderBottom: '1px solid rgba(201,162,39,0.1)', textDecoration: 'none' }}
+                  className="hover:bg-accent-gold/10 transition-colors">
+                  <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: 3 }}>Call — Cell</span>
+                  <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>678-491-7134</span>
+                </a>
+                <a href="mailto:info@davishouseofautos.com?subject=Schedule a Viewing&body=Hi Dameon,%0A%0AI'd like to schedule a viewing. Please let me know your availability.%0A%0AThank you."
+                  onClick={() => setShowViewingOptions(false)}
+                  style={{ display: 'block', padding: '14px 18px', textDecoration: 'none' }}
+                  className="hover:bg-accent-gold/10 transition-colors">
+                  <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: 3 }}>Email</span>
+                  <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>info@davishouseofautos.com</span>
+                </a>
+              </div>
+            )}
           </div>
         </div>
-      </div>
 
-      {/* Stats — desktop only */}
-      <div className="absolute bottom-10 right-[60px] hidden md:flex gap-12 items-end z-20">
-        {[
-          { value: '100+', label: 'Vehicles Sold' },
-          { value: '4+', label: 'Years Experience' },
-          { value: '100%', label: 'Client Satisfaction' },
-        ].map((stat) => (
-          <div key={stat.label} className="text-center">
-            <div className="font-serif text-[2.2rem] font-semibold text-accent-gold leading-none mb-1">{stat.value}</div>
-            <div className="text-[10px] tracking-[0.2em] uppercase text-text-muted">{stat.label}</div>
-          </div>
-        ))}
+        {/* Stats */}
+        <div className="flex gap-8 md:gap-14 mt-12 md:mt-16">
+          {[
+            { value: '200+', label: 'Vehicles Brokered' },
+            { value: '4+', label: 'Years Experience' },
+            { value: '100%', label: 'Client Satisfaction' },
+          ].map((stat) => (
+            <div key={stat.label}>
+              <div className="font-serif text-[2rem] md:text-[2.4rem] font-semibold text-accent-gold leading-none mb-1">{stat.value}</div>
+              <div className="text-[9px] md:text-[10px] tracking-[0.2em] uppercase text-white/50">{stat.label}</div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

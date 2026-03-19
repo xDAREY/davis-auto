@@ -18,7 +18,7 @@ export default function InventoryPage() {
       <FilterBar />
       <VehicleGrid />
       <Footer />
-      <VehicleModal />
+      {/* <VehicleModal /> */}
     </main>
   )
 }

@@ -1,3 +1,5 @@
+'use client'
+
 export function ContactInfo() {
   return (
     <div className="space-y-6 md:space-y-8">
@@ -15,9 +17,23 @@ export function ContactInfo() {
           ),
           label: 'Location',
           content: (
-            <p className="text-[13px] md:text-body-sm text-text-light leading-relaxed">
-              2759 Delk Road Suite 2731<br />Marietta, GA 30067
-            </p>
+            <div>
+              <p className="text-[13px] md:text-body-sm text-text-light leading-relaxed mb-2">
+                2759 Delk Road Suite 2731<br />Marietta, GA 30067
+              </p>
+              <a
+                href="https://maps.google.com/?q=2759+Delk+Road+Suite+2731+Marietta+GA+30067"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[10px] tracking-[0.12em] uppercase text-accent-gold hover:text-accent-gold-light transition-colors"
+                style={{ textDecoration: 'none' }}
+              >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+                Open in Maps
+              </a>
+            </div>
           ),
         },
         {
@@ -43,8 +59,7 @@ export function ContactInfo() {
           label: 'Email',
           content: (
             <>
-              <a href="mailto:davishouseofautos.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">info@davishouseofautos.com</a>
-              <a href="mailto:sales@davishouseauto.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">sales@davishouseauto.com</a>
+              <a href="mailto:info@davishouseofautos.com" className="block text-[13px] md:text-body-sm text-text-light hover:text-accent-gold transition-colors">info@davishouseofautos.com</a>
             </>
           ),
         },
@@ -60,6 +75,7 @@ export function ContactInfo() {
         </div>
       ))}
 
+      {/* Business Hours */}
       <div className="mt-6 md:mt-8 border border-tertiary/40 p-5 md:p-6">
         <h3 className="font-serif text-[1rem] font-bold text-accent-gold mb-4 md:mb-5">Business Hours</h3>
         <div className="space-y-2 md:space-y-3">
@@ -74,6 +90,20 @@ export function ContactInfo() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Embedded map */}
+      <div className="border border-tertiary/40 overflow-hidden" style={{ height: 220 }}>
+        <iframe
+          title="Davis House of Automotive location"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.6!2d-84.5318!3d33.9304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f518e4a1234567%3A0x0!2s2759+Delk+Rd+%232731%2C+Marietta%2C+GA+30067!5e0!3m2!1sen!2sus!4v1234567890"
+          width="100%"
+          height="220"
+          style={{ border: 0, filter: 'grayscale(80%) invert(5%) contrast(90%)' }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+        />
       </div>
     </div>
   )

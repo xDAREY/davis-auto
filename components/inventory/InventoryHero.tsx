@@ -11,19 +11,39 @@ export function InventoryHero() {
   }, [setActiveSection])
 
   return (
-    <section className="w-full bg-secondary/30 border-b border-accent-gold/20">
-      <div className="container-gutter max-w-7xl mx-auto pt-32 pb-12">
-        <div className="flex items-center gap-3 mb-5">
+    <section className="relative w-full overflow-hidden" style={{ paddingTop: 0 }}>
+      {/* Blurred background — collage of regular cars */}
+      <div className="absolute inset-0">
+        <img
+          src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?w=1400&q=80"
+          alt=""
+          aria-hidden="true"
+          className="w-full h-full object-cover object-center"
+          style={{ filter: 'blur(4px)', transform: 'scale(1.06)' }}
+        />
+        <div className="absolute inset-0" style={{ background: 'rgba(15,23,42,0.88)' }} />
+        <div className="absolute bottom-0 left-0 right-0 h-20" style={{ background: 'linear-gradient(to bottom, transparent, #0F172A)' }} />
+      </div>
+
+      <div className="relative z-10 container-gutter max-w-7xl mx-auto pt-36 pb-14">
+        {/* Breadcrumb */}
+        <nav className="flex items-center gap-2 text-[10px] tracking-[0.1em] uppercase text-text-muted mb-6">
+          <a href="/" className="hover:text-accent-gold transition-colors">Home</a>
+          <span className="opacity-30">›</span>
+          <span className="text-accent-gold">Inventory</span>
+        </nav>
+
+        <div className="flex items-center gap-3 mb-4">
           <div className="w-8 h-px bg-accent-gold" />
-          <span className="text-[11px] tracking-[0.25em] uppercase text-accent-gold font-medium">
+          <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase', color: '#C9A227', fontWeight: 500 }}>
             Our Collection
           </span>
         </div>
-        <h1 className="font-serif text-[clamp(2.2rem,6vw,5rem)] font-light text-text-primary leading-tight mb-3 md:mb-4">
-          Available <em className="italic text-accent-gold">Inventory</em>
+        <h1 style={{ fontFamily: 'var(--font-outfit)', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 700, color: '#F8F5EE', lineHeight: 1.1, marginBottom: 12 }}>
+          Available Inventory
         </h1>
-        <p className="text-[14px] text-text-muted max-w-xl leading-relaxed">
-          Browse our current selection of premium, thoroughly inspected vehicles. Updated regularly.
+        <p style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, color: '#94A3B8', maxWidth: 480, lineHeight: 1.7 }}>
+          Browse our current selection of thoroughly inspected vehicles. Updated regularly.
         </p>
       </div>
     </section>

@@ -1,23 +1,21 @@
 'use client'
 
-import { useNavigation } from '@/app/providers'
+import { useRouter } from 'next/navigation'
 import { Car } from '@/lib/types'
 
 export function VehicleCard({ car }: { car: Car }) {
-  const { setSelectedCar, setModalOpen } = useNavigation()
-
-  const handleClick = () => {
-    setSelectedCar(car)
-    setModalOpen(true)
-  }
+  const router = useRouter()
 
   return (
     <div
-      onClick={handleClick}
-      className="group cursor-pointer bg-secondary/40 border border-tertiary/30 hover:border-accent-gold/40 transition-all duration-300"
+      onClick={() => router.push(`/inventory/${car.id}`)}
+      className="group cursor-pointer transition-all duration-300"
+      style={{ background: 'rgba(15,23,42,0.7)', border: '1px solid rgba(255,255,255,0.08)' }}
+      onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'rgba(201,162,39,0.4)')}
+      onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)')}
     >
-      {/* Image — tighter aspect ratio on mobile */}
-      <div className="relative overflow-hidden aspect-[16/9] md:aspect-[4/3]">
+      {/* Image */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: '16/9' }}>
         {car.images?.[0] ? (
           <img
             src={car.images[0]}
@@ -25,71 +23,51 @@ export function VehicleCard({ car }: { car: Car }) {
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
-          <div className="w-full h-full bg-tertiary/20 flex items-center justify-center">
-            <span className="text-3xl opacity-20">🚗</span>
+          <div className="w-full h-full flex items-center justify-center" style={{ background: 'rgba(255,255,255,0.02)' }}>
+            <svg className="w-10 h-10 opacity-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M3 12h.01M3 7l3-3h12l3 3v9a1 1 0 01-1 1H4a1 1 0 01-1-1V7z" />
+            </svg>
           </div>
         )}
-
-        {/* Badge */}
         {car.badge && (
-          <div className="absolute top-3 left-3">
-            <span className="text-[9px] font-semibold tracking-[0.2em] uppercase px-2.5 py-1 bg-accent-gold text-background">
-              {car.badge}
-            </span>
-          </div>
+          <span className="absolute top-3 left-3 text-[9px] font-semibold tracking-[0.2em] uppercase px-2.5 py-1 bg-accent-gold text-background">
+            {car.badge}
+          </span>
         )}
-
-        {/* Status — only show if not available */}
         {car.status !== 'available' && (
-          <div className="absolute top-3 right-3">
-            <span className={`text-[9px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 ${
-              car.status === 'reserved'
-                ? 'border border-accent-gold text-accent-gold bg-background/80'
-                : 'bg-red-500/90 text-white'
-            }`}>
-              {car.status}
-            </span>
-          </div>
+          <span className={`absolute top-3 right-3 text-[9px] font-semibold tracking-[0.15em] uppercase px-2.5 py-1 ${
+            car.status === 'reserved'
+              ? 'border border-accent-gold text-accent-gold bg-background/80'
+              : 'bg-red-500/90 text-white'
+          }`}>
+            {car.status}
+          </span>
         )}
       </div>
 
-      {/* Content — reduced padding on mobile */}
-      <div className="p-4 md:p-5">
-        {/* Make / Model */}
-        <div className="mb-3">
-          <h3 className="font-serif text-base md:text-lg font-semibold text-text-primary leading-tight">
-            {car.year} {car.make}
-          </h3>
-          <p className="text-sm text-accent-gold">{car.model}</p>
+      {/* Info */}
+      <div className="p-4">
+        <h3 style={{ fontFamily: 'var(--font-outfit)', fontSize: 14, fontWeight: 600, color: '#F8F5EE', marginBottom: 6, lineHeight: 1.3 }}>
+          {car.year} {car.make} {car.model}
+        </h3>
+
+        <div className="flex gap-0 flex-wrap mb-3">
+          {[car.mileage, car.fuel_type, car.transmission?.split(' ')[0]]
+            .filter(Boolean)
+            .map((spec, i, arr) => (
+              <span key={i} style={{ fontFamily: 'var(--font-outfit)', fontSize: 10, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#94A3B8', paddingRight: i < arr.length - 1 ? 8 : 0, marginRight: i < arr.length - 1 ? 8 : 0, borderRight: i < arr.length - 1 ? '1px solid rgba(255,255,255,0.1)' : 'none' }}>
+                {spec}
+              </span>
+            ))}
         </div>
 
-        {/* Quick specs — 3 pills */}
-        <div className="flex gap-2 flex-wrap mb-4">
-          {car.mileage && (
-            <span className="text-[10px] tracking-[0.1em] uppercase text-text-muted border border-tertiary/40 px-2 py-0.5">
-              {car.mileage}
-            </span>
-          )}
-          {car.transmission && (
-            <span className="text-[10px] tracking-[0.1em] uppercase text-text-muted border border-tertiary/40 px-2 py-0.5">
-              {car.transmission.split(' ')[0]}
-            </span>
-          )}
-          {car.fuel_type && (
-            <span className="text-[10px] tracking-[0.1em] uppercase text-text-muted border border-tertiary/40 px-2 py-0.5">
-              {car.fuel_type}
-            </span>
-          )}
-        </div>
-
-        {/* Price + CTA */}
-        <div className="flex items-center justify-between pt-3 border-t border-tertiary/20">
-          <div className="font-serif text-lg md:text-xl font-bold text-accent-gold">
+        <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+          <span style={{ fontFamily: 'var(--font-outfit)', fontSize: '1.1rem', fontWeight: 700, color: '#C9A227' }}>
             ${car.price.toLocaleString()}
-          </div>
-          <button className="text-[10px] font-semibold tracking-[0.15em] uppercase px-3 py-1.5 border border-accent-gold/40 text-accent-gold hover:bg-accent-gold hover:text-background transition-all duration-200">
-            View Details
-          </button>
+          </span>
+          <span style={{ fontFamily: 'var(--font-outfit)', fontSize: 10, fontWeight: 600, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(201,162,39,0.6)' }} className="group-hover:text-accent-gold transition-colors">
+            View Details →
+          </span>
         </div>
       </div>
     </div>

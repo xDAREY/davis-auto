@@ -25,7 +25,7 @@ export default function Home() {
       <Testimonials />
       <CTABanner />
       <Footer />
-      <VehicleModal />
+      {/* <VehicleModal /> */}
     </main>
   )
 }
