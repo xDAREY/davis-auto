@@ -12,28 +12,28 @@ export function BrandStory() {
           </div>
 
           <h2 className="font-serif text-[clamp(1.8rem,4vw,3.2rem)] font-light text-text-primary leading-tight mb-6 md:mb-8">
-            Atlanta&apos;s Home for
+            From Our House
             <br />
-            <em className="italic text-accent-gold">Premium</em> Vehicle Brokerage
+            <em className="italic text-accent-gold">To Yours</em>
           </h2>
 
           <div className="space-y-4 text-[13px] md:text-[14px] text-text-muted leading-[1.8] mb-8 md:mb-10">
             <p>
-              Davis House of Automotive was built on one straightforward principle: connecting buyers with the right vehicle at the right price, without the hassle or guesswork that too often defines the car-buying experience.
+              At Davis House of Automotives, we believe that buying a vehicle should feel like coming home. Established in 2022, our business was built on a simple mission: to provide reliable, high-quality vehicles at prices that beat the competition.
             </p>
             <p>
-              Based in Marietta, Georgia, we serve the greater Atlanta area as a dedicated automotive brokerage, sourcing quality pre-owned and luxury vehicles, handling the negotiation on your behalf, and ensuring every car we represent meets our standard before it reaches you.
+              We understand that a vehicle is more than just transportation — it&apos;s an investment in your daily life, your family, and your future. That&apos;s why we take pride in carefully selecting dependable vehicles you can trust.
             </p>
             <p>
-              We are not a dealership. We are your advocate in the market, working exclusively in your interest to find the vehicle you want, at a price that makes sense.
+              At Davis House of Automotives, you&apos;re not just another customer — you&apos;re part of the family. Whether you&apos;re purchasing your first car or upgrading to something new, we&apos;re here to make the process smooth, transparent, and rewarding.
             </p>
           </div>
 
           <div className="flex flex-wrap gap-8">
             {[
-              { value: '200+', label: 'Vehicles Brokered' },
-              { value: '4+', label: 'Years in Business' },
-              { value: 'ATL', label: 'Based in Atlanta' },
+              { value: '200+', label: 'Vehicles Sold' },
+              { value: '2022', label: 'Est.' },
+              { value: '100%', label: 'Customer Focused' },
             ].map((stat) => (
               <div key={stat.label}>
                 <div className="font-serif text-[2rem] md:text-[2.5rem] font-semibold text-accent-gold leading-none mb-1">
@@ -53,7 +53,7 @@ export function BrandStory() {
           <div className="absolute bottom-0 right-8 w-[65%] h-[70%] overflow-hidden z-10">
             <img
               src="https://images.unsplash.com/photo-1574023240744-64c47c8c0676?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Atlanta"
+              alt="Davis House of Automotives"
               className="w-full h-full object-cover"
             />
           </div>

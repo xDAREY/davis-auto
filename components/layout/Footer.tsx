@@ -59,11 +59,11 @@ export function Footer() {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-[11px] text-text-muted">&copy; {year} Davis House of Automotive. All rights reserved.</p>
-          <div className="flex gap-2">
+          {/* <div className="flex gap-2">
             <a href="#" aria-label="LinkedIn" className="w-9 h-9 border border-tertiary/50 flex items-center justify-center text-[11px] font-bold text-text-muted hover:border-accent-gold/50 hover:text-accent-gold transition-all">in</a>
             <a href="#" aria-label="X" className="w-9 h-9 border border-tertiary/50 flex items-center justify-center text-[11px] font-bold text-text-muted hover:border-accent-gold/50 hover:text-accent-gold transition-all">X</a>
             <a href="#" aria-label="WhatsApp" className="w-9 h-9 border border-tertiary/50 flex items-center justify-center text-[11px] font-bold text-text-muted hover:border-accent-gold/50 hover:text-accent-gold transition-all">W</a>
-          </div>
+          </div> */}
         </div>
 
       </div>

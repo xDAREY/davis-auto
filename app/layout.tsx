@@ -18,7 +18,7 @@ const outfit = Outfit({
 
 export const metadata: Metadata = {
   title: 'Davis House of Automotive | Luxury Vehicle Brokerage',
-  description: 'Discover curated luxury and high-performance vehicles. Premium automotive brokerage specializing in rare finds and exceptional quality.',
+  description: 'Discover curated luxury and high-performance vehicles. Quality automotive brokerage specializing in rare finds and exceptional quality.',
   viewport: {
     width: 'device-width',
     initialScale: 1,

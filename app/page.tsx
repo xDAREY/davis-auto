@@ -11,7 +11,7 @@ import { VehicleModal } from '@/components/inventory/VehicleModal'
 export const metadata = {
   title: 'Davis House of Automotive | Luxury Vehicle Brokerage',
   description:
-    'Discover curated luxury and high-performance vehicles. Premium automotive brokerage specializing in rare finds.',
+    'Discover curated luxury and high-performance vehicles. Quality automotive brokerage specializing in rare finds.',
 }
 
 export default function Home() {

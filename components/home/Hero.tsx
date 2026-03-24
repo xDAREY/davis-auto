@@ -47,7 +47,7 @@ export function Hero() {
       <div className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1600&q=85"
-          alt="Premium vehicles"
+          alt="Quality vehicles"
           className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(15,23,42,0.85) 0%, rgba(15,23,42,0.55) 50%, rgba(15,23,42,0.82) 100%)' }} />
@@ -207,7 +207,7 @@ export function Hero() {
         <div className="flex gap-8 md:gap-14 mt-12 md:mt-16">
           {[
             { value: '200+', label: 'Vehicles Brokered' },
-            { value: '4+', label: 'Years Experience' },
+            { value: '2022', label: 'Est.' },
             { value: '100%', label: 'Client Satisfaction' },
           ].map((stat) => (
             <div key={stat.label}>

@@ -37,7 +37,7 @@ export function Testimonials() {
           </span>
         </div>
         <h2 className="font-serif text-[clamp(2rem,4vw,3.2rem)] font-bold text-text-primary leading-tight mb-10 md:mb-14">
-          Trusted by <em className="italic text-accent-gold">Atlanta</em> Buyers
+          Trusted by <em className="italic text-accent-gold">Buyers</em>
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
