@@ -223,7 +223,7 @@ export function VehicleModal() {
                 {showCallOptions ? 'Cancel' : 'Schedule Viewing'}
               </button>
               <a
-                href={`mailto:info@davishouseofautos.com?subject=Information Request: ${selectedCar.year} ${selectedCar.make} ${selectedCar.model}&body=Hi Dameon,%0A%0AI'm interested in the ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} listed at $${selectedCar.price.toLocaleString()}. Could you please send me more information?%0A%0AThank you.`}
+                href={`mailto:info@davishouseofautomotives.com?subject=Information Request: ${selectedCar.year} ${selectedCar.make} ${selectedCar.model}&body=Hi Dameon,%0A%0AI'm interested in the ${selectedCar.year} ${selectedCar.make} ${selectedCar.model} listed at $${selectedCar.price.toLocaleString()}. Could you please send me more information?%0A%0AThank you.`}
                 className="flex-1 luxury-button-secondary text-[11px] text-center"
                 style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
               >

@@ -191,12 +191,12 @@ export function Hero() {
                   <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: 3 }}>Call — Cell</span>
                   <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>678-491-7134</span>
                 </a>
-                <a href="mailto:info@davishouseofautos.com?subject=Schedule a Viewing&body=Hi Dameon,%0A%0AI'd like to schedule a viewing. Please let me know your availability.%0A%0AThank you."
+                <a href="mailto:info@davishouseofautomotives.com?subject=Schedule a Viewing&body=Hi Dameon,%0A%0AI'd like to schedule a viewing. Please let me know your availability.%0A%0AThank you."
                   onClick={() => setShowViewingOptions(false)}
                   style={{ display: 'block', padding: '14px 18px', textDecoration: 'none' }}
                   className="hover:bg-accent-gold/10 transition-colors">
                   <span style={{ display: 'block', fontSize: 9, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#94A3B8', marginBottom: 3 }}>Email</span>
-                  <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>info@davishouseofautos.com</span>
+                  <span style={{ fontFamily: 'var(--font-cormorant)', fontSize: 17, color: '#C9A227' }}>info@davishouseofautomotives.com</span>
                 </a>
               </div>
             )}

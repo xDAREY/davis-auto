@@ -13,7 +13,7 @@ const navLinks = [
 ]
 
 // Fully encoded — no raw spaces, newlines or special chars in the href
-const MAILTO_ENQUIRY = `mailto:info@davishouseofautos.com?subject=${encodeURIComponent('Vehicle Enquiry')}&body=${encodeURIComponent("Hi Dameon,\n\nI'd like to enquire about one of your vehicles. Please get back to me at your earliest convenience.\n\nThank you.")}`
+const MAILTO_ENQUIRY = `mailto:info@davishouseofautomotives.com?subject=${encodeURIComponent('Vehicle Enquiry')}&body=${encodeURIComponent("Hi Dameon,\n\nI'd like to enquire about one of your vehicles. Please get back to me at your earliest convenience.\n\nThank you.")}`
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)

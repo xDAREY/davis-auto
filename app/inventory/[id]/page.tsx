@@ -62,7 +62,7 @@ export default function CarPage() {
   const images = car.images ?? []
 
   // mailto href built separately so it's clean
-  const mailtoHref = `mailto:info@davishouseofautos.com?subject=Information%20Request%3A%20${encodeURIComponent(`${car.year} ${car.make} ${car.model}`)}&body=${encodeURIComponent(`Hi Dameon,\n\nI'm interested in the ${car.year} ${car.make} ${car.model} listed at $${car.price.toLocaleString()}. Could you please send me more information?\n\nThank you.`)}`
+  const mailtoHref = `mailto:info@davishouseofautomotives.com?subject=Information%20Request%3A%20${encodeURIComponent(`${car.year} ${car.make} ${car.model}`)}&body=${encodeURIComponent(`Hi Dameon,\n\nI'm interested in the ${car.year} ${car.make} ${car.model} listed at $${car.price.toLocaleString()}. Could you please send me more information?\n\nThank you.`)}`
 
   return (
     <main className="min-h-screen bg-background text-text-primary">

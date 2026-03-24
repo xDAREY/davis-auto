@@ -49,7 +49,7 @@ export function Footer() {
               <li className="leading-relaxed">2759 Delk Road Suite 2731<br />Marietta, GA 30067</li>
               <li><a href="tel:6787532700" className="hover:text-text-primary transition-colors">678-753-2700</a></li>
               <li><a href="tel:6784917134" className="hover:text-text-primary transition-colors">678-491-7134 (Cell)</a></li>
-              <li><a href="mailto:info@davishouseofautos.com" className="hover:text-text-primary transition-colors">info@davishouseofautos.com</a></li>
+              <li><a href="mailto:info@davishouseofautomotives.com" className="hover:text-text-primary transition-colors">info@davishouseofautomotives.com</a></li>
             </ul>
           </div>
 

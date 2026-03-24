@@ -114,10 +114,10 @@ export function CTABanner() {
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase text-text-muted mb-2">Email</p>
               <a
-                href="mailto:info@davishouseofautos.com"
+                href="mailto:info@davishouseofautomotives.com"
                 className="font-serif text-base md:text-lg text-accent-gold hover:text-accent-gold-light transition-colors break-all"
               >
-                info@davishouseofautos.com
+                info@davishouseofautomotives.com
               </a>
             </div>
             <div>
