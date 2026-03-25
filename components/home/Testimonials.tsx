@@ -11,8 +11,6 @@ interface Testimonial {
 }
 
 export function Testimonials() {
-  const [modalLink, setModalLink] = useState<string | null>(null);
-
   const testimonials: Testimonial[] = [
     {
       id: '1',
@@ -43,25 +41,6 @@ export function Testimonials() {
     },
   ];
 
-  const openReview = (url: string) => {
-    // Try modal first
-    setModalLink(url);
-
-    // Optional fallback: open in new window if iframe blocked
-    setTimeout(() => {
-      const testIframe = document.createElement('iframe');
-      testIframe.src = url;
-      testIframe.onload = () => {};
-      testIframe.onerror = () => {
-        // iframe blocked, open new window
-        window.open(url, '_blank', 'noopener,noreferrer');
-        setModalLink(null);
-      };
-      document.body.appendChild(testIframe);
-      document.body.removeChild(testIframe);
-    }, 100);
-  };
-
   return (
     <section
       id="testimonials"
@@ -84,14 +63,14 @@ export function Testimonials() {
           {testimonials.map((t) => (
             <div
               key={t.id}
-              className="flex flex-col p-6 md:p-8 transition-all duration-300 cursor-pointer"
+              className="flex flex-col p-6 md:p-8 transition-all duration-300 cursor-pointer hover:opacity-80"
               style={{
                 background: t.highlight ? 'rgba(201,162,39,0.06)' : 'rgba(15,23,42,0.6)',
                 border: `1px solid ${
                   t.highlight ? 'rgba(201,162,39,0.4)' : 'rgba(255,255,255,0.06)'
                 }`,
               }}
-              onClick={() => openReview(t.link)}
+              onClick={() => window.open(t.link, '_blank', 'noopener,noreferrer')}
             >
               {/* Stars */}
               <div className="flex gap-1 mb-5">
@@ -127,9 +106,7 @@ export function Testimonials() {
                   </span>
                 </div>
                 <div>
-                  <p className="text-[13px] font-semibold text-text-primary">
-                    {t.author}
-                  </p>
+                  <p className="text-[13px] font-semibold text-text-primary">{t.author}</p>
                   <p className="text-[11px] text-text-muted">{t.title}</p>
                 </div>
               </div>
@@ -137,31 +114,6 @@ export function Testimonials() {
           ))}
         </div>
       </div>
-
-      {/* Modal */}
-      {modalLink && (
-        <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-          onClick={() => setModalLink(null)}
-        >
-          <div
-            className="bg-white w-[90%] md:w-[70%] h-[80%] p-4 relative"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              className="absolute top-2 right-2 text-black font-bold text-xl"
-              onClick={() => setModalLink(null)}
-            >
-              ✕
-            </button>
-            <iframe
-              src={modalLink}
-              className="w-full h-full border-none"
-              title="Google Review"
-            />
-          </div>
-        </div>
-      )}
     </section>
   );
 }
