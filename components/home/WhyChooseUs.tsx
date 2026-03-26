@@ -10,7 +10,7 @@ export function WhyChooseUs() {
     {
       number: '02',
       title: 'White-Glove Service',
-      description: 'From first enquiry to final handover, Dameon handles the entire process — so you don\'t have to deal with dealerships, negotiations, or paperwork alone.',
+      description: 'From first inquiry to final handover, Dameon handles the entire process — so you don\'t have to deal with dealerships, negotiations, or paperwork alone.',
     },
     {
       number: '03',

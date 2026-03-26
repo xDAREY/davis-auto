@@ -72,7 +72,7 @@ export function Hero() {
         </h1>
 
         <p className="text-[13px] md:text-[15px] text-white/70 mb-8 md:mb-10 max-w-md leading-relaxed">
-          200+ vehicles brokered. Hand-picked inventory. Zero dealership pressure.
+          300+ vehicles brokered. Hand-picked inventory. Zero dealership pressure.
         </p>
 
         {/* Search box */}
@@ -206,7 +206,7 @@ export function Hero() {
         {/* Stats */}
         <div className="flex gap-8 md:gap-14 mt-12 md:mt-16">
           {[
-            { value: '200+', label: 'Vehicles Brokered' },
+            { value: '300+', label: 'Vehicles Brokered' },
             { value: '2022', label: 'Est.' },
             { value: '100%', label: 'Client Satisfaction' },
           ].map((stat) => (

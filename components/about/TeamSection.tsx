@@ -47,7 +47,7 @@ export function TeamSection() {
 
             <div className="flex flex-wrap gap-8 pt-8 border-t border-tertiary/30">
               {[
-                { value: '200+', label: 'Vehicles Sold' },
+                { value: '300', label: 'Vehicles Sold' },
                 { value: '2022', label: 'Est.' },
                 { value: '100%', label: 'Customer Focused' },
               ].map((stat) => (

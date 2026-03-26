@@ -31,7 +31,7 @@ export function BrandStory() {
 
           <div className="flex flex-wrap gap-8">
             {[
-              { value: '200+', label: 'Vehicles Sold' },
+              { value: '300+', label: 'Vehicles Sold' },
               { value: '2022', label: 'Est.' },
               { value: '100%', label: 'Customer Focused' },
             ].map((stat) => (

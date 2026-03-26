@@ -14,7 +14,7 @@ function formatUSPhone(value: string): string {
 export function EnquiryForm() {
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', email: '', phone: '',
-    subject: 'Vehicle Enquiry', message: '',
+    subject: 'Vehicle Inquiry', message: '',
   })
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -90,7 +90,7 @@ export function EnquiryForm() {
   return (
     <div>
       <h2 className="font-serif text-[1.5rem] md:text-[1.8rem] font-bold text-text-primary mb-6 md:mb-8">
-        Send an Enquiry
+        Send an Inquiry
       </h2>
 
       <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5">
@@ -141,7 +141,7 @@ export function EnquiryForm() {
         <div>
           <label htmlFor="subject" className={labelClass}>Subject</label>
           <select id="subject" name="subject" value={formData.subject} onChange={handleChange} className={inputClass}>
-            <option value="Vehicle Enquiry">Vehicle Enquiry</option>
+            <option value="Vehicle Inquiry">Vehicle Inquiry</option>
             <option value="Schedule Viewing">Schedule Viewing</option>
             <option value="Fleet Management">Fleet Management</option>
             <option value="Other">Other</option>
