@@ -68,7 +68,7 @@ export function Navigation() {
           <div ref={enquireRef} className="hidden md:block relative">
             <button onClick={() => { setEnquireOpen((o) => !o); setCallOpen(false) }}
               className="border border-accent-gold text-accent-gold text-[11px] font-semibold tracking-[0.15em] uppercase px-5 py-2 hover:bg-accent-gold hover:text-background transition-all duration-300 flex items-center gap-2">
-              Enquire Now
+              Inquire Now
               <span style={{ fontSize: 9, display: 'inline-block', transition: 'transform 0.2s', transform: enquireOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}>▼</span>
             </button>
 

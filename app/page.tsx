@@ -6,6 +6,7 @@ import { Testimonials } from '@/components/home/Testimonials'
 import { CTABanner } from '@/components/home/CTABanner'
 import { Navigation } from '@/components/layout/Navigation'
 import { Footer } from '@/components/layout/Footer'
+import { ReviewForm } from '@/components/home/ReviewForm'
 import { VehicleModal } from '@/components/inventory/VehicleModal'
 
 export const metadata = {
@@ -23,6 +24,7 @@ export default function Home() {
       <FeaturedVehicles />
       <WhyChooseUs />
       <Testimonials />
+      <ReviewForm />
       <CTABanner />
       <Footer />
       {/* <VehicleModal /> */}
